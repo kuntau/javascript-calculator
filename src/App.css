@@ -12,3 +12,40 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+#calculator {
+  @apply shadow-lg;
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  /* grid-template-rows: repeat(6, 1fr); */
+  grid-auto-rows: 80px;
+  gap: .2rem .2rem;
+}
+
+#screen {
+  grid-area: 1 / 1 / 3 / 5;
+}
+#allclear { grid-area: 3 / 1 / 4 / 3; }
+#add { grid-area: 6 / 4 / 8 / 5; }
+
+#allclear, #clear {
+  @apply flex items-center justify-center cursor-pointer hover:bg-red-400;
+}
+
+#equals {
+  @apply flex items-center justify-center font-bold cursor-pointer hover:bg-green-400;
+  font-family: "Major Mono Display", monospace;
+}
+
+#divide, #multiply, #subtract, #add {
+  @apply flex items-center justify-center font-bold cursor-pointer hover:bg-yellow-400;
+  font-family: "Major Mono Display", monospace;
+}
+
+#seven, #eight, #nine,
+#four, #five, #six,
+#one, #two, #three,
+#zero, #decimal {
+  @apply flex items-center justify-center font-bold cursor-pointer hover:bg-blue-400;
+  font-family: "Major Mono Display", monospace;
+}
