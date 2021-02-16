@@ -22,11 +22,17 @@ function App() {
   const getLastArray = (arr: Array<any>) => arr[arr.length-1]
   const getLastChar = (text: any) => text.charAt([text.length-1])
   const doCalculation = (input: Array<string|number>) => Function(`'use strict'; return (${input.join('')})`)()
-  const reset = () => { setDisplay(""); setOperation(null); setCalculate([]); setCheck(false); setHistory([]); setDecimal(false) }
+  const reset = () => {
+    setDisplay(""); setOperation(null); setCalculate([]); setCheck(false); setHistory([]); setDecimal(false); setNegative(false);
+  }
 
   const processInput = (input: any) => {
     if (isNumber(input.value)) {
-      if (operation) {
+      if (operation && negative) {
+        console.log("op-ve")
+        setDisplay(display + input.value.toString())
+        setNegative(false)
+      } else if (operation) {
         setCalculate([...calculate, display])
         setOperation(null)
         setDisplay(input.value.toString())
@@ -49,12 +55,14 @@ function App() {
         setCheck(false)
       } else if (operation) {
         if (input.id == "subtract") {
+          console.log("subtract")
+          if (negative) { return }
           setNegative(true)
           setCalculate([...calculate, display])
           setDisplay(input.value.toString())
         } else {
           if (negative) {
-            setCalculate([calculate.pop()])
+            setCalculate([calculate.shift()])
             setNegative(false)
           }
           setOperation(input.id)
